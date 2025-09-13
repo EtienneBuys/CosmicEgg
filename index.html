@@ -185,7 +185,17 @@
                     </p>
                 </div>
                 <div class="col-md-6">
-                    <form method="POST" name="contact" id="contact-us-form" data-netlify="true">
+                    <form 
+                    method="POST" 
+                    name="contact" 
+                    id="contact-us-form" 
+                    data-netlify="true"
+                    data-netlify-recaptcha="true">
+                        <p class="hidden">
+                            <label>
+                            Don’t fill this out if you’re human: <input name="bot-field" type="text" />
+                            </label>
+                        </p>
                         <div class="row">
                           <div class="form-group col-md-6">
                             <label for="name">Your Name</label>
@@ -200,6 +210,7 @@
                           <label for="message">Message</label>
                           <textarea name="message" class="form-control" id="message" rows="3" required></textarea>
                         </div>
+                        <div data-netlify-recaptcha="true"></div>
                         <button type="submit" class="btn font-weight-bold atlas-cta atlas-cta-wide cta-green my-3">
                           Submit
                         </button>
