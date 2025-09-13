@@ -96,12 +96,12 @@
         <div class="row">
             <div data-aos="fade-right" data-aos-delay="200" data-aos-duration="1000" data-aos-once="true" class="col-md-4 text-center py-4 mt-5">
                 <h4 class="my-4">BASIC</h4>
-                <p class="font-weight-bold">$ <span class="display-2 font-weight-bold">199</span> / MO.</p>
-                <small><strong><span>5 hours of support</span> <br>Ideal for small store owners needing basic technical assistance and maintenance.</strong></small>
+                <p class="font-weight-bold">R <span class="display-2 font-weight-bold">2400</span> / MO.</p>
+                <small><strong><span>4 hours of support</span> <br>Ideal for small store owners needing basic technical assistance and maintenance.</strong></small>
                 <ul class="list-unstyled">
                     <li><strong>Includes:</strong></li>
-                    <li>Basic troubleshooting, minor fixes</li>
-                    <li>Non-urgent email support</li>
+                    <li>Troubleshooting and bug fixes <br>(e.g., plugin conflicts, performance issues)</li>
+                    <li>Non-urgent email technical support</li>
                     <li>Theme and plugin updates</li>
                     <li>Monthly site health status report</li>
                     <li>Testing</li>
@@ -110,11 +110,10 @@
             </div>
             <div data-aos="fade-up" data-aos-duration="1000" data-aos-once="true" class="col-md-4 text-center py-4 mt-5 rounded" id="price-table__premium">
                 <h4 class="my-4">MID</h4>
-                <p class="font-weight-bold">$ <span class="display-2 font-weight-bold">399</span> / MO.</p>
+                <p class="font-weight-bold">R <span class="display-2 font-weight-bold">6000</span> / MO.</p>
                 <small><strong><span>10 hours of support</span> <br>For store owners requiring experienced technical support, maintenance and minor new feature development.</strong></small>
                 <ul class="list-unstyled">
                     <li><strong>Includes Basic plus:</strong></li>
-                    <li>More complex troubleshooting <br>(e.g., plugin conflicts, performance issues)</li>
                     <li>Urgent email support</li>
                     <li>Minor customization and <br>WooCommerce configuration</li>
                     <li>Security & performance optimization</li>
@@ -123,7 +122,7 @@
             </div>
             <div data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000" data-aos-once="true" class="col-md-4 text-center py-4 mt-5">
                 <h4 class="my-4">PREMIUM</h4>
-                <p class="font-weight-bold">$ <span class="display-2 font-weight-bold">999</span> / MO.</p>
+                <p class="font-weight-bold">R <span class="display-2 font-weight-bold">9000</span> / MO.</p>
                 <small><strong><span>15 hours of support</span> <br>Enterprise level premium technical support and complex new feature development. For large, high-traffic Woocommerce websites.</strong></small>
                 <ul class="list-unstyled">
                     <li><strong>Includes Basic, Mid plus:</strong></li>
@@ -222,6 +221,14 @@
             Copyright © <span id="year"></span> Cosmic Egg Dev & Design Studio
         </div>
     </div>
+
+    <!-- Modal Structure -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="modalMessage"></p>
+        </div>
+    </div>
     
     <!-- AOS -->
     <script src="js/aos.js"></script>
@@ -250,6 +257,51 @@
         //     event.preventDefault();
         //     document.getElementById("contact-us-success").style.display = "block";
         // });
+
+        const modal = document.getElementById('myModal');
+        const openBtn = document.getElementById('openModal');
+        const closeBtn = document.querySelector('.close');
+        const modalMessage = document.getElementById('modalMessage');
+
+
+        const handleSubmit = event => {
+            event.preventDefault();
+
+            const myForm = event.target;
+            const formData = new FormData(myForm);
+
+            fetch("/", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString()
+            })
+            .then(() => {
+                console.log("Form successfully submitted")
+                modalMessage.textContent = "Thank you for contacting us, we'll get back o you shortly.";
+                modal.style.display = 'block';
+            })
+            .catch((error) => { 
+               console.log("Form submit error",error);
+               modalMessage.textContent = "Sorry, there was an error submitting your request.";
+               modal.style.display = 'block';
+            });
+        };
+
+        document.querySelector("form").addEventListener("submit", handleSubmit);
+
+
+        // close when clicking the ×
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        // close when clicking outside the modal box
+        window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+        });
+
 
     </script>
 </body>
