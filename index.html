@@ -262,6 +262,7 @@
         const openBtn = document.getElementById('openModal');
         const closeBtn = document.querySelector('.close');
         const modalMessage = document.getElementById('modalMessage');
+        const modalContent = document.querySelector('.modal-content');
 
 
         const handleSubmit = event => {
@@ -277,12 +278,14 @@
             })
             .then(() => {
                 console.log("Form successfully submitted")
-                modalMessage.textContent = "Thank you for contacting us, we'll get back o you shortly.";
+                modalMessage.innerHTML = "<p><strong>Success!</strong><br>Thank you for contacting us!<br> We'll get back to you shortly.</p>";
+                modalContent.style.borderBottom = '5px solid #88E788';
                 modal.style.display = 'block';
             })
             .catch((error) => { 
                console.log("Form submit error",error);
-               modalMessage.textContent = "Sorry, there was an error submitting your request.";
+               modalMessage.innerHTML = "<p><strong>Sorry!</strong><br> There was an error submitting your request.</p>";
+                modalContent.style.borderBottom = '5px solid #FF7276';
                modal.style.display = 'block';
             });
         };

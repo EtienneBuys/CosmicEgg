@@ -228,7 +228,7 @@ button {
 
 /* Modal inner box */
 .modal-content {
-  background: #fff;
+  background: #ffffff !important;
   margin: 10% auto;
   padding: 20px;
   border-radius: 8px;
@@ -237,6 +237,7 @@ button {
   position: relative;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   animation: fadeIn 0.3s ease;
+  color:#292b2c ;
 }
 
 /* Close button (×) */
